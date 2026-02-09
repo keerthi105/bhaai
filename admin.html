@@ -2,342 +2,111 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>BhA-AI Admin</title>
+<title>BhA-AI CMS Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-/* ========= ROOT COLORS ========= */
-:root{
-  --glass: rgba(255, 255, 255, 0.415);
-  --border: rgba(255,255,255,0.28);
-  --shadow: 0 10px 40px rgba(0,0,0,0.35);
-
-  --primary:#3b82f6;
-  --success:#22c55e;
-  --danger:#ef4444;
-
-  --text:#ffffff;
-}
-
-/* ========= BACKGROUND ========= */
 body{
-  margin:0;
-  font-family:'Inter', 'Segoe UI', sans-serif;
-  height:100vh;
-  overflow:hidden; /* ❌ page will not scroll */
- display:flex;
-  align-items:center;     /* vertical center */
-  justify-content:center; /* horizontal center */
-
-  background:url("bg.jpg");
-  background-size:cover;
-  background-position:center;
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  padding:20px;
 }
-
-
-/* dark cinematic overlay */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:rgba(15,23,42,0.65);
-  backdrop-filter: blur(1px);
-  z-index:-1;
-}
-
-/* ========= MAIN GLASS PANEL ========= */
 .box{
-  width:80vh;
-  height:550px;               /* 🔒 fixed height */
-  margin:40px auto;
-
-  background:rgba(255,255,255,0.18);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-
-  border-radius:2px;
-  border:1px solid rgba(255,255,255,0.3);
-
-  box-shadow:0 12px 40px rgba(255, 255, 255, 0.536);
-
-  display:flex;
-  flex-direction:column;    /* allows inner scroll */
+  max-width:650px;
+  margin:auto;
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
 }
-
-
-/* ========= HEADINGS ========= */
-h2{
-  margin-left: 200px;
-  text-align:center;
-  font-weight:1000;
-  letter-spacing:.5px;
-}
-
-h3{
-  margin-left: 130px;
-  margin-bottom:12px;
-  font-weight:1000;
-}
-
-/* ========= TOP BAR ========= */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:1px;
-}
-
-/* ========= SECTIONS ========= */
-.section{
-  margin-left: 20px;
-  width: 95%;
-  margin-top:3px;
-  padding-top:2px;
-  border-top:1px solid rgba(255,255,255,0.2);
-}
-
-/* ========= ULTRA INPUT DESIGN ========= */
-input,select{
-
-  width:80%;
+h2,h3{text-align:center}
+input,select,button{
+  width:100%;
   padding:10px;
-
-  margin-top:1px;
-
-  border-radius:5px;
-
-  border:1px solid rgba(255,255,255,0.35);
-
-  background:rgba(255,255,255,0.92); /* 🔥 almost solid for readability */
-
-  color:#0f172a; /* DARK TEXT = SUPER CLEAR */
-
-  font-size:15px;
-  font-weight:500;
-
-  outline:none;
-
-  transition:.25s;
+  margin-top:10px;
+  border-radius:6px;
+  border:none;
 }
-
-/* placeholder */
-input::placeholder{
-  color:#475569;
-}
-
-/* focus glow */
-input:focus, select:focus{
-  border:1px solid #3b82f6;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.25);
-}
-
-/* ========= PREMIUM BUTTONS ========= */
 button{
-  padding:12px 18px;
-  border-radius:12px;
-  border:none;
+  background:#22c55e;
+  font-weight:bold;
   cursor:pointer;
-  font-size:14px;
-  font-weight:600;
-  margin-top:12px;
-
-  transition:.25s;
 }
-
-/* hover animation */
-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,.25);
+.section{
+  margin-top:30px;
+  border-top:1px solid #334155;
+  padding-top:20px;
 }
-
-/* click */
-button:active{
-  transform:scale(.97);
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,#3b82f6,#2563eb);
-  color:white;
-}
-
-.btn-success{
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-  color:white;
-}
-
-.btn-danger{
-  background:linear-gradient(135deg,#ef4444,#dc2626);
-  color:white;
-}
-
-.btn-outline{
-  margin-right: 10px;
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.5);
-  color:white;
-}
-
-/* ========= ITEM CARDS ========= */
 .item{
-  background:rgba(255,255,255,0.25);
-  border-radius:14px;
-  padding:14px;
-  margin-top:12px;
-
-  border:1px solid rgba(255,255,255,0.35);
-
-  backdrop-filter: blur(12px);
-}
-
-/* links */
-.item a{
-  color:#0300c2;
-  font-weight:500;
-  text-decoration:none;
-}
-
-.item small{
-  color:#e2e8f0;
-}
-.content{
-  flex:1;
-  overflow-y:auto;
-  padding-right:10px;
-}
-
-/* smooth scrollbar */
-.content::-webkit-scrollbar{
-  width:8px;
-}
-.content::-webkit-scrollbar-thumb{
-  background:rgba(255,255,255,0.35);
-  border-radius:10px;
-}
-.content::-webkit-scrollbar-track{
-  background:transparent;
-}
-
-
-/* ========= TOAST ========= */
-#toast{
-  position:static;
-  bottom:30px;
-  right:10px;
-
-  background:#020617;
-  color:white;
-
-  padding:14px 18px;
-  border-radius:12px;
-
-  box-shadow:0 8px 25px rgba(0,0,0,.4);
-
-  display:none;
-}
-
-/* ========= LOGIN BOX CENTER ========= */
-/* ========= PREMIUM CENTER LOGIN ========= */
-
-#loginBox{
-  max-width:400px;
-  width:70%;
-
-  margin:auto;              /* horizontal center */
-
+  background:#334155;
   padding:10px;
-
-  height:auto;              /* ❗ remove fixed height */
-  min-height:60px;
-
-  visibility:visible;
-/* hide by default, shown when not logged in */
-  flex-direction:column;
-  justify-content:center;
-
-  background:rgba(255,255,255,0.18);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.35);
-
-  box-shadow:0 10px 35px rgba(0,0,0,0.35);
+  margin-top:10px;
+  border-radius:6px;
 }
-#loginBox input{
-  background:rgba(255,255,255,0.9);
-  color:#0f172a;
-  border:none;
-  font-weight:500;
+.delete{
+  background:#ef4444;
+  margin-top:6px;
+}
+.hidden{display:none}
+.item a {
+  color: #38bdf8; /* uniform color for all links */
+  text-decoration: none;
+  word-break: break-all;
 }
 
-
-/* ========= HIDDEN ========= */
-.hidden{
-  display:none;
+.item a:hover {
+  text-decoration: underline;
 }
 
 </style>
-
 </head>
 
 <body>
-
-<div id="toast"></div>
-
-<!-- LOGIN -->
-<div class="box" id="loginBox">
-  <h3>Admin Login</h3>
+    <div class="box" id="loginBox">
+  <h3>🔐 Admin Login</h3>
   <input id="loginEmail" placeholder="Email">
   <input id="loginPass" type="password" placeholder="Password">
-  <button class="btn-primary" onclick="login()">Login</button>
+  <button onclick="login()">Login</button>
 </div>
 
-<!-- ADMIN PANEL -->
 <div class="box hidden" id="adminPanel">
+<h2>🤖 BhA-AI CMS Admin Panel</h2>
 
-  <!-- fixed header -->
-  <div class="topbar">
-    <h2>BhA-AI Admin</h2>
-    <button class="btn-outline" onclick="logout()">Logout</button>
-  </div>
-  <div class="content">
 <!-- MODULE MANAGER -->
 <div class="section">
-<h3>Module Manager</h3>
-<input id="moduleName" placeholder="Module Name">
+<h3>📦 Module Manager</h3>
+<input id="moduleName" placeholder="Module Name (Eg: About College)">
 <select id="moduleType">
   <option value="simple">Simple (Title + URL)</option>
-  <option value="faculty">Faculty</option>
+  <option value="faculty">Faculty (Department-based)</option>
 </select>
-<button class="btn-success" onclick="addModule()">Add Module</button>
+<button onclick="addModule()">Add Module</button>
 <div id="moduleList"></div>
 </div>
 
 <!-- ITEM MANAGER -->
 <div class="section">
-<h3>Item Manager</h3>
+<h3>📝 Item Manager</h3>
 <select id="activeModule" onchange="loadItems()"></select>
 
 <div id="simpleForm" class="hidden">
   <input id="itemTitle" placeholder="Title">
   <input id="itemUrl" placeholder="URL">
-  <button class="btn-success" onclick="addItem()">Add Item</button>
+  <button onclick="addItem()">Add Item</button>
 </div>
 
 <div id="facultyForm" class="hidden">
   <input id="deptName" placeholder="Department Name">
-  <button class="btn-success" onclick="addDepartment()">Add Department</button>
+  <button onclick="addDepartment()">Add Department</button>
   <div id="deptList"></div>
 </div>
 
-<div id="itemList">
-  <small>Select a module to manage items</small>
-</div>
+<div id="itemList"></div>
 </div>
 </div>
 
 <!-- Firebase -->
+ 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -350,93 +119,106 @@ const firebaseConfig={
 };
 firebase.initializeApp(firebaseConfig);
 const db=firebase.firestore();
-const auth=firebase.auth();
 
-/* Toast */
-function toast(msg){
-  var t=document.getElementById("toast");
-  t.innerText=msg;
-  t.style.display="block";
-  setTimeout(function(){ t.style.display="none"; },2500);
+const auth = firebase.auth();
+
+function login() {
+  const email = document.getElementById("loginEmail").value;
+  const pass = document.getElementById("loginPass").value;
+
+  auth.signInWithEmailAndPassword(email, pass)
+    .catch(err => alert(err.message));
 }
 
-/* Auth */
-function login(){
-  auth.signInWithEmailAndPassword(
-    loginEmail.value,
-    loginPass.value
-  ).catch(function(e){ toast(e.message); });
-}
-
-function logout(){
-  auth.signOut();
-}
-
-auth.onAuthStateChanged(function(u){
-  loginBox.classList.toggle("hidden",!!u);
-  adminPanel.classList.toggle("hidden",!u);
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+  } else {
+    document.getElementById("loginBox").style.display = "block";
+    document.getElementById("adminPanel").style.display = "none";
+  }
 });
 
-/* Modules */
+
+/* SIMPLE MODULES */
 function addModule(){
-  if(!moduleName.value){ toast("Enter module name"); return; }
-  db.collection("modules").add({
-    name:moduleName.value,
-    type:moduleType.value,
-    key:moduleName.value.toLowerCase().replace(/\s+/g,"_")
-  });
+  const name=moduleName.value.trim();
+  const type=moduleType.value;
+  if(!name)return alert("Enter module name");
+  const key=name.toLowerCase().replace(/\s+/g,"_");
+  db.collection("modules").add({name,key,type});
   moduleName.value="";
 }
-
-db.collection("modules").onSnapshot(function(s){
+db.collection("modules").onSnapshot(s=>{
   moduleList.innerHTML="";
   activeModule.innerHTML="<option value=''>Select Module</option>";
-  s.forEach(function(d){
-    var m=d.data();
-    moduleList.innerHTML +=
-  '<div class="item">' +
-  '<b>' + m.name + '</b> <small>' + m.type + '</small><br>' +
+  s.forEach(d=>{
+    const m=d.data();
+   moduleList.innerHTML += `
+  <div class="item">
+    <b>${m.name}</b> (${m.type})
+    <button class="delete" onclick="editModule('${d.id}','${m.name}','${m.type}')">Edit</button>
+    <button class="delete" onclick="del('modules','${d.id}')">Delete</button>
+  </div>
+`;
 
-  '<button class="btn-primary" onclick="editModule(\'' + d.id + '\', \'' + m.name + '\')">Edit</button> ' +
-
-  '<button class="btn-danger" onclick="del(\'modules\',\'' + d.id + '\')">Delete</button>' +
-  '</div>';
-
-
-    activeModule.innerHTML +=
-      '<option value="' + m.key + '" data-type="' + m.type + '">' + m.name + '</option>';
+    activeModule.innerHTML+=`<option value="${m.key}" data-type="${m.type}">${m.name}</option>`;
   });
 });
+function editModule(id, name, type) {
+  // Pre-fill inputs
+  moduleName.value = name;
+  moduleType.value = type;
 
-/* Items */
+  // Change Add button to Update button temporarily
+  const btn = document.querySelector("#moduleList").previousElementSibling; // the Add Module button
+  btn.textContent = "Update Module";
+  btn.onclick = () => {
+    db.collection("modules").doc(id).update({
+      name: moduleName.value,
+      type: moduleType.value,
+      key: moduleName.value.toLowerCase().replace(/\s+/g,"_")
+    }).then(() => {
+      moduleName.value = "";
+      moduleType.value = "simple";
+      btn.textContent = "Add Module";
+      btn.onclick = addModule;
+    });
+  };
+}
+
+/* ITEM MANAGER */
 function loadItems(){
   itemList.innerHTML="";
+  deptList.innerHTML="";
   simpleForm.classList.add("hidden");
   facultyForm.classList.add("hidden");
 
-  var opt=activeModule.options[activeModule.selectedIndex];
-  if(!opt || !opt.value) return;
+  const opt=activeModule.selectedOptions[0];
+  if(!opt)return;
+  const type=opt.dataset.type;
 
-  if(opt.dataset.type==="simple"){
+  if(type==="simple"){
     simpleForm.classList.remove("hidden");
     db.collection("items").where("module","==",opt.value)
-      .onSnapshot(function(s){
+      .onSnapshot(s=>{
         itemList.innerHTML="";
-        if(s.empty){ itemList.innerHTML="<small>No items added</small>"; }
-        s.forEach(function(d){
-          var i=d.data();
-          itemList.innerHTML +=
-            '<div class="item">' +
-            '<b>' + i.title + '</b><br>' +
-            '<a href="' + i.url + '" target="_blank">' + i.url + '</a><br>' +
-            '<button class="btn-primary" onclick="editItem(\'' + d.id + '\', \'' + i.title + '\', \'' + i.url + '\')">Edit</button> ' +
-        '<button class="btn-danger" onclick="del(\'items\',\'' + d.id + '\')">Delete</button>'
-'</div>';
+        s.forEach(d=>{
+          const i=d.data();
+          itemList.innerHTML+=`
+<div class="item">
+  <b>${i.title}</b><br>
+  <a href="${i.url}" target="_blank">${i.url}</a>
+  <button class="delete" onclick="editItem('${d.id}','${i.title}','${i.url}')">Edit</button>
+  <button class="delete" onclick="del('items','${d.id}')">Delete</button>
+</div>`;
+
         });
       });
   }
 
-  if(opt.dataset.type==="faculty"){
+  if(type==="faculty"){
     facultyForm.classList.remove("hidden");
     loadDepartments();
   }
@@ -451,80 +233,138 @@ function addItem(){
   itemTitle.value="";
   itemUrl.value="";
 }
+function editItem(id, title, url) {
+  // Pre-fill inputs
+  itemTitle.value = title;
+  itemUrl.value = url;
 
-/* Faculty */
+  // Change Add button to Save button temporarily
+  const btn = document.querySelector("#simpleForm button");
+  btn.textContent = "Update Item";
+  btn.onclick = () => {
+    db.collection("items").doc(id).update({
+      title: itemTitle.value,
+      url: itemUrl.value
+    }).then(() => {
+      itemTitle.value = "";
+      itemUrl.value = "";
+      btn.textContent = "Add Item";
+      btn.onclick = addItem;
+    });
+  };
+}
+
+/* FACULTY */
 function addDepartment(){
-  if(!deptName.value){ toast("Enter department"); return; }
-  db.collection("faculty_departments").add({name:deptName.value});
-  deptName.value="";
+  const name = deptName.value.trim();
+  if(!name) return alert("Enter department name");
+  db.collection("faculty_departments").add({ name });
+  deptName.value = "";
 }
 
 function loadDepartments(){
-  db.collection("faculty_departments").onSnapshot(function(s){
+  db.collection("faculty_departments").onSnapshot(s=>{
     deptList.innerHTML="";
-    if(s.empty){ deptList.innerHTML="<small>No departments added</small>"; }
-    s.forEach(function(d){
-      deptList.innerHTML +=
-        '<div class="item">' +
-        '<b>' + d.data().name + '</b><br>' +
-       '<button class="btn-primary" onclick="editDept(\'' + d.id + '\', \'' + d.data().name + '\')">Edit</button> ' +
-
-'<button class="btn-danger" onclick="del(\'faculty_departments\',\'' + d.id + '\')">Delete</button>'
-'</div>';
+    s.forEach(d=>{
+      const deptData = d.data();
+      deptList.innerHTML+=`
+      <div class="item" id="deptDiv_${d.id}">
+        <b id="deptNameText_${d.id}">${deptData.name}</b>
+        <input placeholder="Faculty Name" id="fn_${d.id}">
+        <input placeholder="Faculty URL" id="fu_${d.id}">
+        <button onclick="addFaculty('${d.id}')">Add Faculty</button>
+        <button onclick="editDepartment('${d.id}')">Edit Dept</button>
+        <button onclick="deleteDepartment('${d.id}')">Delete Dept</button>
+        <div id="fl_${d.id}"></div>
+      </div>`;
+      loadFaculty(d.id);
     });
   });
 }
 
-function editDept(id, oldName){
+// EDIT DEPARTMENT
+function editDepartment(id){
+  const nameText = document.getElementById("deptNameText_" + id);
+  const currentName = nameText.textContent;
 
-  const newName = prompt("Edit Department:", oldName);
-  if(!newName) return;
-
-  db.collection("faculty_departments").doc(id).update({
-    name:newName
-  });
-
-  toast("Department Updated ✅");
-}
-
-
-function editItem(id, oldTitle, oldUrl){
-
-  const newTitle = prompt("Edit Title:", oldTitle);
-  if(!newTitle) return;
-
-  const newUrl = prompt("Edit URL:", oldUrl);
-  if(!newUrl) return;
-
-  db.collection("items").doc(id).update({
-    title:newTitle,
-    url:newUrl
-  });
-
-  toast("Item Updated ✅");
-}
-
-/* Delete */
-function del(col,id){
-  if(confirm("Delete this item?")){
-    db.collection(col).doc(id).delete();
-    toast("Deleted");
+  const newName = prompt("Edit Department Name:", currentName);
+  if(newName && newName.trim() !== ""){
+    db.collection("faculty_departments").doc(id).update({
+      name: newName.trim()
+    });
   }
 }
 
-function editModule(id, oldName){
-
-  const newName = prompt("Edit Module Name:", oldName);
-
-  if(!newName) return;
-
-  db.collection("modules").doc(id).update({
-    name:newName,
-    key:newName.toLowerCase().replace(/\s+/g,"_")
-  });
-
-  toast("Module Updated ✅");
+// DELETE DEPARTMENT
+function deleteDepartment(id){
+  if(confirm("Are you sure you want to delete this department? All its faculty will also be removed.")){
+    // Delete all faculty under this department
+    db.collection("faculty_members").where("department","==",id)
+      .get()
+      .then(snapshot=>{
+        snapshot.forEach(doc => doc.ref.delete());
+      });
+    // Delete department itself
+    db.collection("faculty_departments").doc(id).delete();
+  }
 }
+function addFaculty(dept){
+  db.collection("faculty_members").add({
+    department:dept,
+    name:document.getElementById("fn_"+dept).value,
+    url:document.getElementById("fu_"+dept).value
+  });
+}
+
+function loadFaculty(dept){
+  db.collection("faculty_members")
+    .where("department","==",dept)
+    .onSnapshot(s=>{
+      const div=document.getElementById("fl_"+dept);
+      div.innerHTML="";
+      s.forEach(d=>{
+        const f=d.data();
+        div.innerHTML+=`
+<div>
+  <a href="${f.url}" target="_blank">${f.name}</a>
+  <button class="delete" onclick="editFaculty('${d.id}','${f.name}','${f.url}')">Edit</button>
+  <button class="delete" onclick="del('faculty_members','${d.id}')">X</button>
+</div>`;
+
+      });
+    });
+}
+function editFaculty(id, name, url) {
+  // Pre-fill the faculty inputs dynamically
+  const inputName = document.getElementById("fn_" + id);
+  const inputUrl = document.getElementById("fu_" + id);
+
+  inputName.value = name;
+  inputUrl.value = url;
+
+  // Change Add button to Update button
+  const btn = inputName.nextElementSibling.nextElementSibling; // the Add button
+  btn.textContent = "Update";
+  btn.onclick = () => {
+    db.collection("faculty_members").doc(id).update({
+      name: inputName.value,
+      url: inputUrl.value
+    }).then(() => {
+      btn.textContent = "Add Faculty";
+      btn.onclick = () => addFaculty(inputName.id.split("_")[1]);
+      inputName.value = "";
+      inputUrl.value = "";
+    });
+  };
+}
+
+/* DELETE */
+/* DELETE */
+function del(col,id){
+  db.collection(col).doc(id).delete();
+}
+
+
 
 </script>
 </body>
